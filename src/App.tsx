@@ -1,7 +1,5 @@
-import './App.css'
-
 function App() {
-  return <></>
+  return <div className="text-primary">Hello World</div>;
 }
 
-export default App
+export default App;
