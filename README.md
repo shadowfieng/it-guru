@@ -1,75 +1,63 @@
-# React + TypeScript + Vite
+# IT Guru — Products Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A product management SPA built with React 19, TypeScript, and Vite. Features JWT-protected routes, a searchable/sortable products table, add/edit modals, and pagination — all backed by the [DummyJSON](https://dummyjson.com) public API.
 
-Currently, two official plugins are available:
+**Live demo:** https://shadowfieng.github.io/it-guru/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Authentication with protected routes
+- Products table with search, column sorting, and pagination (20 items/page)
+- Add and edit products via modal forms with Zod validation
+- Toast notifications for mutations
+- Loading states with progress bar
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Tech stack
 
-Note: This will impact Vite dev & build performances.
+| Layer | Library |
+|---|---|
+| UI | React 19, Tailwind CSS v4 |
+| Routing | React Router v7 |
+| Server state | TanStack Query v5 |
+| Client state | Zustand v5 |
+| Validation | Zod v4 |
+| Build | Vite 8, React Compiler |
 
-## Expanding the ESLint configuration
+## Getting started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm install
+pnpm dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Environment variables
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| Variable | Default | Description |
+|---|---|---|
+| `VITE_API_BASE_URL` | `https://dummyjson.com` | Base URL for the API |
+| `VITE_BASE` | `/` | Vite base path (set automatically on CI) |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Scripts
+
+```bash
+pnpm dev       # start dev server
+pnpm build     # type-check + build
+pnpm preview   # preview production build
+pnpm lint      # run ESLint
 ```
+
+## Project structure
+
+```
+src/
+├── app/          # App entry, router, providers
+├── features/
+│   ├── auth/     # Login form, auth store
+│   └── products/ # Products table, modals, store, API
+├── pages/        # Page compositions
+└── shared/       # API client, UI kit, hooks, config
+```
+
+## Deployment
+
+Pushes to `main` automatically deploy to GitHub Pages via the included workflow (`.github/workflows/deploy.yml`).
