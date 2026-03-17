@@ -53,7 +53,8 @@ export function ProductsPage() {
   };
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, form }: { id: number; form: NewProductForm }) => updateProduct(id, form),
+    mutationFn: ({ id, form }: { id: number; form: NewProductForm }) =>
+      updateProduct(id, form),
     onSuccess: (product) => {
       setToast(`Товар "${product.title}" обновлён`);
     },
@@ -84,7 +85,7 @@ export function ProductsPage() {
     <div className="min-h-screen bg-gray-50 pt-5">
       {/* Page header block */}
       <div className="bg-white border-b rounded-xl border-gray-200 px-[26px] py-[26px]">
-        <div className="max-w-7xl relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center">
           <h1 className="absolute left-0 text-xl font-semibold text-gray-900">
             Товары
           </h1>

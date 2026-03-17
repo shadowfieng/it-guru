@@ -42,4 +42,3 @@
 ## Enhancements
 
 - Add 404 page
-- Multiselect doesn't work
