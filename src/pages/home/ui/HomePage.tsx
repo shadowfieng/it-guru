@@ -1,3 +1,5 @@
+import { ProductsPage } from './ProductsPage';
+
 export function HomePage() {
-  return <div>Home page</div>;
+  return <ProductsPage />;
 }
