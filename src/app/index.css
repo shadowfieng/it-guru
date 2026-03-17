@@ -17,6 +17,15 @@ body {
   color: var(--color-text);
 }
 
+.checkbox-indeterminate {
+  background-color: #3c538e;
+  border-color: #3c538e;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 2'%3E%3Crect width='10' height='2' rx='1' fill='white'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px 2px;
+}
+
 @keyframes progress-bar {
   0% { transform: translateX(-100%); }
   50% { transform: translateX(0%); }

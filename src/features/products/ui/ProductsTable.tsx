@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ProgressBar } from '../../../shared/ui/ProgressBar';
 import type { Product, SortField, SortOrder } from '../model/types';
 import { ProductsTableHeader } from './ProductsTableHeader';
@@ -20,6 +21,23 @@ export function ProductsTable({
   onSort,
   onEdit,
 }: ProductsTableProps) {
+  const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
+
+  const allSelected = products.length > 0 && products.every((p) => selectedIds.has(p.id));
+  const someSelected = !allSelected && products.some((p) => selectedIds.has(p.id));
+
+  const handleSelectAll = (checked: boolean) => {
+    setSelectedIds(checked ? new Set(products.map((p) => p.id)) : new Set());
+  };
+
+  const handleToggle = (id: number, checked: boolean) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      checked ? next.add(id) : next.delete(id);
+      return next;
+    });
+  };
+
   return (
     <div className="relative overflow-x-auto px-8">
       <ProgressBar isLoading={isLoading} />
@@ -28,6 +46,9 @@ export function ProductsTable({
           sortField={sortField}
           sortOrder={sortOrder}
           onSort={onSort}
+          allSelected={allSelected}
+          someSelected={someSelected}
+          onSelectAll={handleSelectAll}
         />
         <tbody>
           {products.length === 0 && !isLoading ? (
@@ -41,7 +62,13 @@ export function ProductsTable({
             </tr>
           ) : (
             products.map((product) => (
-              <ProductsTableRow key={product.id} product={product} onEdit={onEdit} />
+              <ProductsTableRow
+                key={product.id}
+                product={product}
+                isSelected={selectedIds.has(product.id)}
+                onToggle={handleToggle}
+                onEdit={onEdit}
+              />
             ))
           )}
         </tbody>

@@ -1,10 +1,11 @@
-import { useState } from 'react';
 import { cn } from '../../../shared/lib/utils';
 import { EditIcon } from '../../../shared/ui/icons';
 import type { Product } from '../model/types';
 
 interface ProductsTableRowProps {
   product: Product;
+  isSelected: boolean;
+  onToggle: (id: number, checked: boolean) => void;
   onEdit: (product: Product) => void;
 }
 
@@ -13,21 +14,19 @@ const priceFormatter = new Intl.NumberFormat('ru-RU', {
   maximumFractionDigits: 2,
 });
 
-export function ProductsTableRow({ product, onEdit }: ProductsTableRowProps) {
-  const [checked, setChecked] = useState(false);
-
+export function ProductsTableRow({ product, isSelected, onToggle, onEdit }: ProductsTableRowProps) {
   return (
     <tr className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
       <td
         className={cn(
           'px-4 py-3 border-l-4 transition-colors',
-          checked ? 'border-l-selection' : 'border-l-transparent'
+          isSelected ? 'border-l-selection' : 'border-l-transparent'
         )}
       >
         <input
           type="checkbox"
-          checked={checked}
-          onChange={(e) => setChecked(e.target.checked)}
+          checked={isSelected}
+          onChange={(e) => onToggle(product.id, e.target.checked)}
           className="appearance-none w-5 h-5 rounded-[4px] border-2 border-gray-300 checked:bg-[#3C538E] cursor-pointer transition-colors"
         />
       </td>
