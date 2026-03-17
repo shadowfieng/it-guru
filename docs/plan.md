@@ -38,3 +38,8 @@
 
 - Use public api for data: https://dummyjson.com/docs/products
 - Use public api for authorization: https://dummyjson.com/docs/auth
+
+## Enhancements
+
+- Add 404 page
+- Multiselect doesn't work
