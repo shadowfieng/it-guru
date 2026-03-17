@@ -1,4 +1,4 @@
-const AUTH_BASE_URL = 'https://dummyjson.com';
+import { api } from './index';
 
 export interface LoginRequest {
   username: string;
@@ -18,17 +18,9 @@ export interface LoginResponse {
   refreshToken: string;
 }
 
-export async function login(data: LoginRequest): Promise<LoginResponse> {
-  const response = await fetch(`${AUTH_BASE_URL}/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ ...data, expiresInMins: data.expiresInMins ?? 30 }),
+export function login(data: LoginRequest): Promise<LoginResponse> {
+  return api.post<LoginResponse>('/auth/login', {
+    ...data,
+    expiresInMins: data.expiresInMins ?? 30,
   });
-
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({ message: 'Login failed' }));
-    throw new Error(error.message ?? 'Login failed');
-  }
-
-  return response.json() as Promise<LoginResponse>;
 }
