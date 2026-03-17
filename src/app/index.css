@@ -6,6 +6,7 @@
   --font-mono: 'Roboto Mono', ui-monospace, monospace;
 
   --color-primary: #242edb;
+  --color-selection: #3c538e;
   --color-text: #232323;
   --color-text-secondary: #6c6c6c;
   --color-border: #ededed;
@@ -14,4 +15,10 @@
 body {
   font-family: var(--font-sans);
   color: var(--color-text);
+}
+
+@keyframes progress-bar {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0%); }
+  100% { transform: translateX(100%); }
 }

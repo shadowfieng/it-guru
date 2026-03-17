@@ -12,6 +12,8 @@
 | Token                 | Value     |
 |-----------------------|-----------|
 | Primary background    | `#242EDB` |
+| Secondary background  | `#F3F3F3` |
+| Selection             | `#3C538E` |
 | Primary text          | `#232323` |
 | Secondary text        | `#6C6C6C` |
 | Border                | `#EDEDED` |
