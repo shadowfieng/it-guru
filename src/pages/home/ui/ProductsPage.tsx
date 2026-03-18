@@ -82,9 +82,9 @@ export function ProductsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-5">
+    <div className="h-screen flex flex-col bg-gray-50 pt-5">
       {/* Page header block */}
-      <div className="bg-white border-b rounded-xl border-gray-200 px-[26px] py-[26px]">
+      <div className="bg-white border-b rounded-xl border-gray-200 px-[26px] py-[26px] shrink-0">
         <div className="relative flex items-center justify-center">
           <h1 className="absolute left-0 text-xl font-semibold text-gray-900">
             Товары
@@ -95,11 +95,11 @@ export function ProductsPage() {
         </div>
       </div>
 
-      <div className="pt-6">
+      <div className="pt-6 flex-1 flex flex-col overflow-hidden">
         {/* Table card */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col flex-1 overflow-hidden">
           {/* Card header */}
-          <div className="flex items-center justify-between px-8 py-10">
+          <div className="flex items-center justify-between px-8 py-10 shrink-0">
             <span className="text-xl font-semibold text-text">Все позиции</span>
             <div className="flex items-center gap-2">
               <button
@@ -120,23 +120,27 @@ export function ProductsPage() {
           </div>
 
           {/* Table */}
-          <ProductsTable
-            products={products}
-            isLoading={isFetching}
-            sortField={sortField}
-            sortOrder={sortOrder}
-            onSort={toggleSort}
-            onEdit={setEditingProduct}
-          />
+          <div className="flex-1 overflow-y-auto">
+            <ProductsTable
+              products={products}
+              isLoading={isFetching}
+              sortField={sortField}
+              sortOrder={sortOrder}
+              onSort={toggleSort}
+              onEdit={setEditingProduct}
+            />
+          </div>
 
           {/* Pagination */}
           {total > 0 && (
-            <Pagination
-              currentPage={currentPage}
-              total={total}
-              limit={LIMIT}
-              onPageChange={setCurrentPage}
-            />
+            <div className="shrink-0 border-t border-gray-200">
+              <Pagination
+                currentPage={currentPage}
+                total={total}
+                limit={LIMIT}
+                onPageChange={setCurrentPage}
+              />
+            </div>
           )}
         </div>
       </div>
