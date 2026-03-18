@@ -39,7 +39,7 @@ export function ProductsTable({
   };
 
   return (
-    <div className="relative overflow-x-auto px-8">
+    <div className="relative px-8">
       <ProgressBar isLoading={isLoading} />
       <table className="w-full">
         <ProductsTableHeader
